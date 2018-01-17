@@ -1,6 +1,26 @@
 <template>
   <div>
-    <div v-for="todo,index in todos" :key="todo.title">
+    <div v-for="todo,index in todos" :key="todo.title" v-if="visibility === 'all'">
+      <b-field class="is-pulled-left">
+        <b-checkbox size="is-large" @input="check(index, $event)">
+          <strike v-if="todo.completed">{{ todo.title }}</strike>
+          <div v-else>{{ todo.title }}</div>
+        </b-checkbox>
+      </b-field>
+      <a class="delete is-pulled-right" @click="delTodo(index)"></a>
+      <div class="is-clearfix"></div>
+    </div>
+    <div v-for="todo,index in todos" :key="todo.title" v-if="visibility === 'active'" v-show="!todo.completed">
+      <b-field class="is-pulled-left">
+        <b-checkbox size="is-large" @input="check(index, $event)">
+          <strike v-if="todo.completed">{{ todo.title }}</strike>
+          <div v-else>{{ todo.title }}</div>
+        </b-checkbox>
+      </b-field>
+      <a class="delete is-pulled-right" @click="delTodo(index)"></a>
+      <div class="is-clearfix"></div>
+    </div>
+    <div v-for="todo,index in todos" :key="todo.title" v-if="visibility === 'completed'" v-show="todo.completed">
       <b-field class="is-pulled-left">
         <b-checkbox size="is-large" @input="check(index, $event)">
           <strike v-if="todo.completed">{{ todo.title }}</strike>
@@ -23,7 +43,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['todos'])
+    ...mapGetters(['todos', 'visibility'])
   },
   methods: {
     ...mapActions(['delTodo', 'changeCompleted']),

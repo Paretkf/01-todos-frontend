@@ -12,6 +12,11 @@ export default {
   components: {
     VisibilityInput
   },
+  data () {
+    return {
+      status: 'All'
+    }
+  },
   computed: {
     ...mapGetters(['todos']),
     item () {
