@@ -10,6 +10,7 @@
       <a class="delete is-pulled-right" @click="delTodo(index)"></a>
       <div class="is-clearfix"></div>
     </div>
+
     <div v-for="todo,index in todos" :key="todo.title" v-if="visibility === 'active'" v-show="!todo.completed">
       <b-field class="is-pulled-left">
         <b-checkbox size="is-large" @input="check(index, $event)">
@@ -20,6 +21,7 @@
       <a class="delete is-pulled-right" @click="delTodo(index)"></a>
       <div class="is-clearfix"></div>
     </div>
+
     <div v-for="todo,index in todos" :key="todo.title" v-if="visibility === 'completed'" v-show="todo.completed">
       <b-field class="is-pulled-left">
         <b-checkbox size="is-large" @input="check(index, $event)">
@@ -30,7 +32,12 @@
       <a class="delete is-pulled-right" @click="delTodo(index)"></a>
       <div class="is-clearfix"></div>
     </div>
-  </div>
+
+    <button class="button is-large is-outlined is-danger" style="width:100%" @click="clearCompeted()">
+      Clear Completed
+    </button>
+    
+  </div>  
 </template>
 
 <script>
@@ -46,7 +53,7 @@ export default {
     ...mapGetters(['todos', 'visibility'])
   },
   methods: {
-    ...mapActions(['delTodo', 'changeCompleted']),
+    ...mapActions(['delTodo', 'changeCompleted', 'clearCompeted']),
     check (index, state) {
       this.changeCompleted({
         index,
