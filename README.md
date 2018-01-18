@@ -1,7 +1,6 @@
-# 01-todos-frontend
-
+# 01-todos-frontend [Demo](http://bitter-pocket.surge.sh/) ตัวอย่างโปรแกรม
 ![Todos](https://raw.githubusercontent.com/AdvWebDevelopment/01-todos-frontend/master/static/todos.png)
-### [Demo](http://bitter-pocket.surge.sh/) 
+
 > Todos Application
 ในโปรเจคนี้มีการใช้งานและได้ติดตั้ง Library พื้นฐานเหล่านี้มาไว้ให้แล้ว สามารถคลิกเข้าไปศึกษาเพิ่มเติมได้เลย
 * [Vuex](https://vuex.vuejs.org/en/) is a state management pattern + library for Vue.js applications.
