@@ -7,7 +7,7 @@
           <div v-else>{{ todo.title }}</div>
         </b-checkbox>
       </b-field>
-      <a class="delete is-pulled-right" @click="delTodo(index)"></a>
+      <a class="delete is-pulled-right" @click="removeTodo(index)"></a>
       <div class="is-clearfix"></div>
     </div>
 
@@ -18,7 +18,7 @@
           <div v-else>{{ todo.title }}</div>
         </b-checkbox>
       </b-field>
-      <a class="delete is-pulled-right" @click="delTodo(index)"></a>
+      <a class="delete is-pulled-right" @click="removeTodo(index)"></a>
       <div class="is-clearfix"></div>
     </div>
 
@@ -29,11 +29,11 @@
           <div v-else>{{ todo.title }}</div>
         </b-checkbox>
       </b-field>
-      <a class="delete is-pulled-right" @click="delTodo(index)"></a>
+      <a class="delete is-pulled-right" @click="removeTodo(index)"></a>
       <div class="is-clearfix"></div>
     </div>
 
-    <button class="button is-large is-outlined is-danger" style="width:100%" @click="clearCompeted()">
+    <button class="button is-large is-outlined is-danger" style="width:100%" @click="clearCompleted()">
       Clear Completed
     </button>
     
@@ -53,7 +53,7 @@ export default {
     ...mapGetters(['todos', 'visibility'])
   },
   methods: {
-    ...mapActions(['delTodo', 'changeCompleted', 'clearCompeted']),
+    ...mapActions(['removeTodo', 'changeCompleted', 'clearCompleted']),
     check (index, state) {
       this.changeCompleted({
         index,
