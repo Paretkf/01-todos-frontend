@@ -64,8 +64,9 @@ export const store = new Vuex.Store({
     saveTodos ({state}) {
       localStorage.setItem('todos', JSON.stringify(state.todos))
     },
-    sortTo ({commit}, { newIndex, oldIndex }) {
+    sortTo ({commit, dispatch}, { newIndex, oldIndex }) {
       commit('SORT_TO', { newIndex, oldIndex })
+      dispatch('saveTodos')
     }
   },
   getters: {
