@@ -2,7 +2,7 @@
   <div id="test">
     <div v-for="todo,index in todos" :key="todo.title" v-if="visibility === 'all'">
       <b-field class="is-pulled-left handle">
-        <b-checkbox size="is-large" @input="check(index, $event)">
+        <b-checkbox size="is-large" @input="check(index, $event)" :value="todo.completed">
           <strike v-if="todo.completed">{{ todo.title }}</strike>
           <div v-else>{{ todo.title }}</div>
         </b-checkbox>
@@ -13,7 +13,7 @@
 
     <div v-for="todo,index in todos" :key="todo.title" v-if="visibility === 'active'" v-show="!todo.completed">
       <b-field class="is-pulled-left handle">
-        <b-checkbox size="is-large" @input="check(index, $event)">
+        <b-checkbox size="is-large" @input="check(index, $event)" :value="todo.completed">
           <strike v-if="todo.completed">{{ todo.title }}</strike>
           <div v-else>{{ todo.title }}</div>
         </b-checkbox>
@@ -24,7 +24,7 @@
 
     <div v-for="todo,index in todos" :key="todo.title" v-if="visibility === 'completed'" v-show="todo.completed">
       <b-field class="is-pulled-left handle">
-        <b-checkbox size="is-large" @input="check(index, $event)">
+        <b-checkbox size="is-large" @input="check(index, $event)" :value="todo.completed">
           <strike v-if="todo.completed">{{ todo.title }}</strike>
           <div v-else>{{ todo.title }}</div>
         </b-checkbox>
@@ -33,7 +33,7 @@
       <div class="is-clearfix"></div>
     </div>
 
-    <button class="button is-large is-outlined is-danger" style="width:100%" @click="clearCompleted()">
+    <button class="button is-pulled-right is-outlined is-danger" @click="clearCompleted()">
       Clear Completed
     </button>
     

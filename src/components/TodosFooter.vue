@@ -18,9 +18,15 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['todos']),
+    ...mapGetters(['todos', 'visibility', 'activeTodos', 'completedTodos', 'allTodos']),
     item () {
-      return this.todos.filter(todo => todo.completed === false).length
+      if (this.visibility === 'all') {
+        return this.allTodos
+      } else if (this.visibility === 'active') {
+        return this.activeTodos
+      } else {
+        return this.completedTodos
+      }
     }
   }
 }

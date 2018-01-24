@@ -3,15 +3,15 @@
     <b-field class="is-pulled-right">
       <b-radio-button v-model="visibility"
         native-value="all">
-        <span>All ( {{ allTodos }} )</span>
+        <span>All ({{ allTodos }})</span>
       </b-radio-button>
       <b-radio-button v-model="visibility"
         native-value="active">
-        <span>Active ( {{activeTodos}} )</span>
+        <span>Active ({{activeTodos}})</span>
       </b-radio-button>
       <b-radio-button v-model="visibility"
         native-value="completed">
-        <span>Completed ( {{completedTodos}} )</span>
+        <span>Completed ({{completedTodos}})</span>
       </b-radio-button>
     </b-field>
   </div>
@@ -23,28 +23,7 @@ import { mapGetters } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters(['todos']),
-    allTodos () {
-      if (this.todos) {
-        return this.todos.length
-      } else {
-        return 0
-      }
-    },
-    activeTodos () {
-      if (this.todos) {
-        return this.todos.filter(todo => todo.completed === false).length
-      } else {
-        return 0
-      }
-    },
-    completedTodos () {
-      if (this.todos) {
-        return this.todos.filter(todo => todo.completed === true).length
-      } else {
-        return 0
-      }
-    },
+    ...mapGetters(['todos', 'activeTodos', 'completedTodos', 'allTodos']),
     visibility: {
       get: function () {
         return store.state.visibility
