@@ -34,6 +34,9 @@ export const store = new Vuex.Store({
     },
     GET_TODOS (state, todos) {
       state.todos = todos
+    },
+    SORT_TO (state, { newIndex, oldIndex }) {
+      state.todos.splice(newIndex, 0, state.todos.splice(oldIndex, 1)[0])
     }
   },
   actions: {
@@ -60,6 +63,9 @@ export const store = new Vuex.Store({
     },
     saveTodos ({state}) {
       localStorage.setItem('todos', JSON.stringify(state.todos))
+    },
+    sortTo ({commit}, { newIndex, oldIndex }) {
+      commit('SORT_TO', { newIndex, oldIndex })
     }
   },
   getters: {
