@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
 
 Vue.use(Vuex)
 
@@ -17,7 +18,7 @@ export const store = new Vuex.Store({
       })
     },
     REMOVE_TODO (state, index) {
-      state.todos.splice(index, 1)
+      state.todos.splice(state.todos.findIndex(todo => todo.id === index), 1)
     },
     CHANGE_VISIBILITY (state, newVisibilityValue) {
       state.visibility = newVisibilityValue
@@ -40,19 +41,46 @@ export const store = new Vuex.Store({
     }
   },
   actions: {
-    getTodos ({commit}, todos) {
-      commit('GET_TODOS', todos)
+    getTodos ({commit}) {
+      axios.get('http://localhost:7777/todos')
+      .then(function (response) {
+        console.log(response)
+        const todos = response.data.todos.map(todo => {
+          return {
+            title: todo.description,
+            completed: todo.done,
+            id: todo._id
+          }
+        })
+        commit('GET_TODOS', todos)
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
     },
     addTodo ({commit, dispatch}, title) {
-      commit('ADD_TODO', title)
-      dispatch('saveTodos')
+      axios.post('http://localhost:7777/post', {
+        description: title,
+        done: false
+      })
+      .then(function (response) {
+        commit('ADD_TODO', response.data.description)
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
     },
     changeVisibility ({commit}, newVisibilityValue) {
       commit('CHANGE_VISIBILITY', newVisibilityValue)
     },
     removeTodo ({commit, dispatch}, index) {
-      commit('REMOVE_TODO', index)
-      dispatch('saveTodos')
+      axios.post('http://localhost:7777/delete/' + index)
+      .then(function (response) {
+        commit('REMOVE_TODO', response.data.id)
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
     },
     changeCompleted ({commit, dispatch}, payload) {
       commit('CHANGE_COMPLETED', payload)

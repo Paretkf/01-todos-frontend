@@ -30,9 +30,7 @@ export default {
     ...mapActions(['getTodos'])
   },
   created () {
-    if (JSON.parse(localStorage.getItem('todos'))) {
-      this.getTodos(JSON.parse(localStorage.getItem('todos')))
-    }
+    this.getTodos()
   }
 }
 </script>
